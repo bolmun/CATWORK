@@ -9,15 +9,7 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = UserAdmin.fieldsets + (
         (
             "Custom Profile",
-            {
-                "fields": (
-                    "avatar",
-                    "gender",
-                    "birthdate",
-                    "is_personal_id",
-                    "is_group_id",
-                )
-            },
+            {"fields": ("avatar", "gender", "is_personal_id", "is_group_id",)},
         ),
     )
 

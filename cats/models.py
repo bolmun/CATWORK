@@ -13,9 +13,14 @@ class AbstractItem(core_models.TimeStampedModel):
         return self.title
 
 
-class HealthIssue(AbstractItem):
+class HealthCondition(AbstractItem):
     class Meta:
-        verbose_name_plural = "Health Issues"
+        verbose_name_plural = "Health Condition"
+
+
+class Diagnosis(AbstractItem):
+    class Meta:
+        verbose_name_plural = "Diagnosis"
 
 
 class Cat(core_models.TimeStampedModel):
@@ -38,10 +43,17 @@ class Cat(core_models.TimeStampedModel):
     dominance = models.IntegerField()
     spontaneity = models.IntegerField()
     friendliness = models.IntegerField()
-    health_issue = models.ManyToManyField(HealthIssue, related_name="cats")
+    health_condition = models.ManyToManyField(HealthCondition, related_name="cats")
+    diagnosis = models.ManyToManyField(
+        Diagnosis, related_name="cats", blank=True, null=True
+    )
     rescue_story = models.TextField()
     care_taker = models.ForeignKey(
-        "users.User", related_name="cats", on_delete=models.PROTECT
+        "users.User",
+        blank=False,
+        null=False,
+        related_name="cats",
+        on_delete=models.PROTECT,
     )
     mom = models.ForeignKey(
         "Cat", null=True, related_name="cats_mom", blank=True, on_delete=models.PROTECT
