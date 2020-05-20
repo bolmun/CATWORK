@@ -7,10 +7,7 @@ from . import models
 class CustomUserAdmin(UserAdmin):
 
     fieldsets = UserAdmin.fieldsets + (
-        (
-            "Custom Profile",
-            {"fields": ("avatar", "gender", "is_personal_id", "is_group_id",)},
-        ),
+        ("Custom Profile", {"fields": ("avatar", "gender", "is_group_id",)},),
     )
 
     list_filter = UserAdmin.list_filter + ("is_group_id",)
@@ -22,6 +19,5 @@ class CustomUserAdmin(UserAdmin):
         "email",
         "is_active",
         "is_staff",
-        "is_personal_id",
         "is_group_id",
     )

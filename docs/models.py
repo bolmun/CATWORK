@@ -37,7 +37,7 @@ class Doc(core_models.TimeStampedModel):
     company_title = models.CharField(max_length=100, blank=True, null=True)
     id_card = models.ImageField()
     job_certification = models.ImageField(blank=True, null=True)
-    instagram_id = models.CharField(max_length=50, blank=True, null=True)
+    instagram_id = models.CharField(max_length=15, blank=True, null=True)
     married = models.BooleanField(default=False)
     family_num = models.IntegerField()
     children_num = models.IntegerField()
@@ -48,6 +48,7 @@ class Doc(core_models.TimeStampedModel):
     insurance_plan = models.BooleanField(default=True)
     protect_window = models.BooleanField(default=True)
     protect_door = models.BooleanField(default=True)
+    reason_adopt = models.TextField()
 
     def __str__(self):
         return f"{self.applicant}님 | {self.cat} 입양 신청서"

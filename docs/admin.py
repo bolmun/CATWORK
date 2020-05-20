@@ -70,7 +70,7 @@ class DocAdmin(admin.ModelAdmin):
                 )
             },
         ),
-        ("Experience", {"fields": ("first_ever_cat",)},),
+        ("Experience", {"fields": ("first_ever_cat", "reason_adopt")},),
     )
 
     list_display = (
@@ -84,7 +84,7 @@ class DocAdmin(admin.ModelAdmin):
     )
 
     raw_id_fields = ("cat", "applicant")
-
+    inlines = (PhotoInline,)
     ordering = (
         "cat",
         "applicant",

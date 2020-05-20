@@ -33,20 +33,26 @@ class Cat(core_models.TimeStampedModel):
         (GENDER_FEMALE, "Female"),
     )
 
-    name = models.CharField(max_length=150)
+    name = models.CharField(max_length=30)
     city = models.CharField(max_length=80)
     gender = models.CharField(choices=GENDER_CHOICES, max_length=10)
     is_neutered = models.BooleanField(default=False)
     birthdate = models.DateField(null=True, blank=True)
+    age = models.CharField(max_length=10, default=0)
     skittishness = models.IntegerField()
     outgoingness = models.IntegerField()
     dominance = models.IntegerField()
     spontaneity = models.IntegerField()
     friendliness = models.IntegerField()
-    health_condition = models.ManyToManyField(HealthCondition, related_name="cats")
-    diagnosis = models.ManyToManyField(
-        Diagnosis, related_name="cats", blank=True, null=True
+    mom_cat = models.ForeignKey(
+        "self", blank=True, null=True, related_name="mom", on_delete=models.SET_NULL,
     )
+    dad_cat = models.ForeignKey(
+        "self", blank=True, null=True, related_name="dad", on_delete=models.SET_NULL,
+    )
+    bro_sis = models.ManyToManyField("self", related_name="bs_cat", blank=True)
+    health_condition = models.ManyToManyField(HealthCondition, related_name="cats")
+    diagnosis = models.ManyToManyField(Diagnosis, related_name="cats", blank=True)
     rescue_story = models.TextField()
     care_taker = models.ForeignKey(
         "users.User",
@@ -55,19 +61,7 @@ class Cat(core_models.TimeStampedModel):
         related_name="cats",
         on_delete=models.PROTECT,
     )
-    mom = models.ForeignKey(
-        "Cat", null=True, related_name="cats_mom", blank=True, on_delete=models.PROTECT
-    )
-    dad = models.ForeignKey(
-        "Cat", null=True, related_name="cats_dad", blank=True, on_delete=models.PROTECT
-    )
-    bro_sis = models.ManyToManyField(
-        "Cat", related_name="cats_bs", blank=True, null=True
-    )
 
-    children = models.ManyToManyField(
-        "Cat", related_name="cats_child", blank=True, null=True
-    )
     barcode = models.IntegerField(blank=True, null=True)
     adopted = models.BooleanField(default=False)
 

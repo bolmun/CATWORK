@@ -46,7 +46,7 @@ class CatAdmin(admin.ModelAdmin):
                 )
             },
         ),
-        ("Family Info", {"fields": ("mom", "dad", "bro_sis", "children")},),
+        ("Family Info", {"fields": ("mom_cat", "dad_cat", "bro_sis")},),
         ("More Detail", {"fields": ("rescue_story", "care_taker")},),
         ("Latest Status", {"fields": ("adopted",)}),
     )
@@ -64,7 +64,9 @@ class CatAdmin(admin.ModelAdmin):
 
     list_filter = ("health_condition", "diagnosis")
 
-    filter_horizontal = ("health_condition", "diagnosis")
+    filter_horizontal = ("health_condition", "diagnosis", "bro_sis")
+
+    inlines = (PhotoInline,)
 
     ordering = (
         "city",

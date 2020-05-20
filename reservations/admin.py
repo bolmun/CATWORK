@@ -16,6 +16,6 @@ class ReservatioAdmin(admin.ModelAdmin):
 
     list_filter = ("status",)
 
-    search_fields = ("applicant__username",)
+    search_fields = ("doc__applicant", "doc__cat")
 
     ordering = ("status",)

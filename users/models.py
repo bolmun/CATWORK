@@ -21,5 +21,4 @@ class User(AbstractUser):
     gender = models.CharField(
         choices=GENDER_CHOICES, max_length=10, null=True, blank=True
     )
-    is_personal_id = models.BooleanField(default=True)
     is_group_id = models.BooleanField(default=False)

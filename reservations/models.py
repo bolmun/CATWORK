@@ -26,7 +26,7 @@ class Reservation(core_models.TimeStampedModel):
     meeting_address = models.CharField(max_length=200)
 
     def __str__(self):
-        return f"{self.applicant}님 | {self.status} | 예약 시간: {self.meeting_time}"
+        return f"{self.doc} | {self.status} | 예약 시간: {self.meeting_time}"
 
     def in_progress(self):
         now = timezone.now()
