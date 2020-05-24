@@ -5,32 +5,86 @@
 
 {% block content %}
 <div>
-    <h1>{{room.name}}</h1>
-    {{room.description}}
+    <h1>{{cat.name}}</h1>
+    <h3>Basic Information</h3>
+    <ul>
+        {% if cat.birthdate == None %}
+        <li>Birthdate : X</li>
+        <li>Estimated age : {{cat.estimated_age}}</li>
+        {% else %}
+        <li>Birthdate : {{cat.birthdate}}</li>
+        <li>Age : {{cat.count_age}}</li>
+        {% endif %}
+        <li>Gender : {{cat.gender}}</li>
+        <li>City : {{cat.city}}</li>
+        <li> Neutered : {% if cat.is_neutered == True %} Yes {% else %} No {% endif %}
+    </ul>
 </div>
+
 <div>
-    <h4>Host : {{room.host.username}}
-    {% if room.host.superhost %}
-        (superhost)
+    <h3>Characteristic</h3>
+    <ul>
+        <li>skittishness : {{cat.skittishness}}</li>
+        <li>outgoingness : {{cat.outgoingness}}</li>
+        <li>dominance : {{cat.dominance}}</li>
+        <li>spontaneity : {{cat.spontaneity}}</li>
+        <li>friendliness : {{cat.friendliness}}</li>
+    </ul>
+</div>
+
+<div>
+    <h3>Family Info</h3>
+    <h4>Parents </h4>
+    <ul>
+        {%if cat.mom_cat != None%}
+        <a href="{% url "cats:detail" cat.mom_cat.pk %}">
+        <li>{{cat.name}}'s mom is {{cat.mom_cat}}</li></a>
+        {%else%} 
+        <li>{{cat.name}}'s mom will be somewhere else...</li>
+        {% endif %}
+        {%if cat.dad_cat != None%}
+        <a href="{% url "cats:detail" cat.dad_cat.pk %}">
+        <li>{{cat.name}}'s dad is {{cat.dad_cat}}</li></a>
+        {%else%} 
+        <li>{{cat.name}}'s dad will be somewhere else...</li>
+        {% endif %}
+    </ul>
+    <h4>Brother & Sister</h4>
+    <ul>
+    {%if cat.bor_sis != None%}
+        {% for bs in cat.bro_sis.all %}
+            <li>{{bs}}</li>
+        {% endfor %}
+    {%else%}
+        <li>{{cat.name}}'s brothers or sisters will be somewhere else...</li>
     {% endif %}
-    </h4>
-    <h3>Amenities</h3>
+    </ul>
+</div>
+
+<div>
+    <h3>Health Condition</h3>
     <ul>
-        {% for a in room.amenities.all %}
-            <li>{{a}}</li>
+        {% for hc in cat.health_condition.all %}
+            <li>{{hc}}</li>
         {% endfor %}
     </ul>
-    <h3>Facilities</h3>
+</div>
+
+<div>
+    <h3>Diagnosis</h3>
     <ul>
-        {% for f in room.facilities.all %}
-            <li>{{f}}</li>
+        {% for d in cat.diagnosis.all %}
+            <li>{{d}}</li>
         {% endfor %}
     </ul>
-    <h3>Rules</h3>
-    <ul>
-        {% for f in room.rules.all %}
-            <li>{{r}}</li>
-        {% endfor %}
-    </ul>
+</div>
+
+<div>
+    <h3>Rescue Story</h3>
+    <span>{{cat.rescue_story}}</span>
+</div>
+
+<div>
+<h4>Care-taker : {{cat.care_taker}}
 </div>
 {% endblock %}

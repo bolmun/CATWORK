@@ -1,7 +1,7 @@
 from django.views.generic import ListView
 from django.urls import reverse
 from django.shortcuts import render, redirect
-from . import models
+from . import models, forms
 
 
 class HomeView(ListView):
@@ -19,3 +19,8 @@ def cat_detail(request, pk):
         return render(request, "cats/cat_details.html", {"cat": cat})
     except models.Cat.DoesNotExist:
         return redirect(reverse("core:home"))
+
+
+def search(request):
+    form = forms.SearchForm()
+    return render(request, "cats/search.html", {"form": form})

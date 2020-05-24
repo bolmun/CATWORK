@@ -8,7 +8,8 @@
     {% for cat in cats  %}
         <h3>
           <a href="{% url "cats:detail" cat.pk %}">
-            {{cat.name}} | {{cat.city}} | {{cat.age}}
+            {{cat.name}} | {{cat.city}} | {% if cat.birthdate == None %}
+        {{cat.estimated_age}} {% else %} {{cat.count_age}}{% endif %} | {{cat.gender}} | {{cat.city}}
           </a>
         </h3>
     {% endfor %}

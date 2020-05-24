@@ -8,8 +8,13 @@
     </title>
   </head>
   <header>
-  {% include "partials/nav.html" %}
-  </header>
+      {% include "partials/nav.html" %}
+      {% block search-bar %}
+        <form method="get" action="{% url "cats:search" %}">
+            <input name="city" placeholder="Search By City" />
+        </form>
+      {% endblock search-bar %}
+    </header>
   <body>
   {% block content %}{% endblock %}
   {% include "partials/footer.html" %}

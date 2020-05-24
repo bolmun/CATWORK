@@ -27,6 +27,7 @@ class CatAdmin(admin.ModelAdmin):
                     "name",
                     "city",
                     "birthdate",
+                    "estimated_age",
                     "gender",
                     "is_neutered",
                     "barcode",
@@ -57,6 +58,8 @@ class CatAdmin(admin.ModelAdmin):
         "gender",
         "is_neutered",
         "birthdate",
+        "count_age",
+        "estimated_age",
         "care_taker",
     )
 

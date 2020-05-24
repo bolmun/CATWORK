@@ -50,6 +50,7 @@ PROJECT_APPS = [
     "reservations.apps.ReservationsConfig",
     "lists.apps.ListsConfig",
     "conversations.apps.ConversationsConfig",
+    "vets.apps.VetsConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
@@ -69,7 +70,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

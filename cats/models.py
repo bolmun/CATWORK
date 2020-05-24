@@ -1,3 +1,5 @@
+import math
+from datetime import date
 from django.db import models
 from core import models as core_models
 
@@ -38,7 +40,7 @@ class Cat(core_models.TimeStampedModel):
     gender = models.CharField(choices=GENDER_CHOICES, max_length=10)
     is_neutered = models.BooleanField(default=False)
     birthdate = models.DateField(null=True, blank=True)
-    age = models.CharField(max_length=10, default=0)
+    estimated_age = models.CharField(max_length=10, default=0)
     skittishness = models.IntegerField()
     outgoingness = models.IntegerField()
     dominance = models.IntegerField()
@@ -71,6 +73,21 @@ class Cat(core_models.TimeStampedModel):
     def save(self, *args, **kwargs):
         self.city = str.capitalize(self.city)
         super().save(*args, **kwargs)
+
+    def count_age(self):
+        now = date.today()
+        birth = self.birthdate
+        if birth != None:
+            difference = now - birth
+            if difference.days > 365:
+                year_age = math.floor((difference.days) / 365)
+                age = f"{year_age} year(s) old"
+            else:
+                month_age = math.floor((difference.days) / 30)
+                age = f"{month_age} months"
+        else:
+            age = self.estimated_age
+        return age
 
 
 class Photo(core_models.TimeStampedModel):

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    Search
+{% endblock page_title %}
+
+{% block content %}
+
+    <h2>Search!</h2>
+
+    <form method="get" action="{% url "cats:search" %}">
+        {{form.as_p}}
+        <button>Search</button>
+    </form>
+
+{% endblock content %} 
