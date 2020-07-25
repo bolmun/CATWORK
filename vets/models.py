@@ -15,9 +15,6 @@ class Vet(core_models.TimeStampedModel):
     expense = models.IntegerField(blank=True, null=True)
     receipt = models.FileField(blank=True, null=True)
 
-    def __str__(self):
-        return f"{self.visit_date} | {self.vet_title} | {self.cat}"
-
     def visit_purpose(self):
         vaccine = self.is_vaccination
         if vaccine == True:
@@ -25,3 +22,6 @@ class Vet(core_models.TimeStampedModel):
         else:
             purpose = f"{self.diagnosis}"
         return purpose
+
+    def __str__(self):
+        return f"{self.visit_date} | {self.vet_title} | {self.visit_purpose()}"

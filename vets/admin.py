@@ -19,6 +19,7 @@ class VetAdmin(admin.ModelAdmin):
     list_filter = ("diagnosis",)
 
     ordering = (
+        "visit_date",
         "cat",
         "vet_title",
         "city",

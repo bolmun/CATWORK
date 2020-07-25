@@ -4,6 +4,6 @@ from . import views as cat_views
 app_name = "cats"
 
 urlpatterns = [
-    path("<int:pk>", cat_views.cat_detail, name="detail"),
-    path("search/", cat_views.search, name="search"),
+    path("<int:pk>", cat_views.CatDetail.as_view(), name="detail"),
+    path("search/", cat_views.SearchView.as_view(), name="search"),
 ]

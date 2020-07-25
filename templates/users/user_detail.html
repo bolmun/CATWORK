@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    {{user_object.first_name}}'s Profile
+{% endblock page_title %}
+
+{% block content %}
+
+<div class="min-h-75vh">
+    <div class="container lg:w-5/12 md:w-1/2 xl:w-1/4 mx-auto my-10 flex flex-col items-center border p-6 border-gray-200">
+
+    {% include "mixins/user_avatar.html" with user=user_object %}
+        <div class="flex justify-center items-center flex-no-wrap">
+            <span class = "text-3xl mt-1">{{user_object.first_name}}</span>
+            <span class = "text-3xl mt-1 ml-1">{{user_object.last_name}}</span>
+            {% if user_object.is_group_id %}
+                <i class="fas fa-users text-2xl mt-1 ml-2 text-blue-400"></i>
+            {% endif %}
+        </div>
+        <div class="flex justify-center items-center flex-wrap flex-col-reverse mt-3 mb-3">
+            <span class = "px-2 py-1 text-sm font-bold">ready to foster
+            {% if user_object.foster_available %}
+                <i class="fas fa-check-circle ml-1 text-blue-400"></i>
+            {% else%}
+                <i class="fas fa-times-circle ml-1 text-red-600"></i>
+            {% endif %}
+            </span>
+            <span class = "px-2 py-1 text-sm font-bold">ready to adopt
+            {% if user_object.adoption_available %}
+                <i class="fas fa-check-circle ml-1 text-blue-400"></i>
+            {% else %}
+                <i class="fas fa-times-circle ml-1 text-red-600"></i>
+            {% endif %}
+            </span>
+        </div>
+
+        {% if user == user_object %}
+            <a href="{% url "users:update" %}" class="btn-link">Edit Profile</a>
+        {% endif %}
+        </div>
+
+        {% if user_object.cats.count > 0%}
+            <h3 class="mb-12 text-2xl text-center">{{user_object.first_name}}'s Caring List</h3>
+            <div class="container mx-auto pb-10">
+                <div class="flex flex-wrap justify-center mb-10">
+                {% for cat in user_object.cats.all %}
+                    {% include "mixins/cat_card.html" with cat=cat %}
+                {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock content %}

@@ -3,7 +3,7 @@ from django.utils.html import mark_safe
 from . import models
 
 
-@admin.register(models.HealthCondition, models.Diagnosis)
+@admin.register(models.HealthCondition, models.Diagnosis, models.Appearance)
 class ItemAdmin(admin.ModelAdmin):
 
     list_display = ("title", "used_by")
@@ -31,6 +31,8 @@ class CatAdmin(admin.ModelAdmin):
                     "gender",
                     "is_neutered",
                     "barcode",
+                    "appearance",
+                    "foster_needed",
                 )
             },
         ),
@@ -44,6 +46,7 @@ class CatAdmin(admin.ModelAdmin):
                     "dominance",
                     "spontaneity",
                     "friendliness",
+                    "care_category",
                 )
             },
         ),
@@ -61,11 +64,13 @@ class CatAdmin(admin.ModelAdmin):
         "count_age",
         "estimated_age",
         "care_taker",
+        "care_category",
+        "foster_needed",
     )
 
     raw_id_fields = ("care_taker",)
 
-    list_filter = ("health_condition", "diagnosis")
+    list_filter = ("health_condition", "diagnosis", "appearance", "foster_needed")
 
     filter_horizontal = ("health_condition", "diagnosis", "bro_sis")
 

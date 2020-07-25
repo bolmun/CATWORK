@@ -25,6 +25,11 @@ class Diagnosis(AbstractItem):
         verbose_name_plural = "Diagnosis"
 
 
+class Appearance(AbstractItem):
+    class Meta:
+        verbose_name_plural = "Appearance"
+
+
 class Cat(core_models.TimeStampedModel):
 
     GENDER_MALE = "male"
@@ -35,17 +40,36 @@ class Cat(core_models.TimeStampedModel):
         (GENDER_FEMALE, "Female"),
     )
 
+    BLUE_CARE = "blue care"
+    GREEN_CARE = "green care"
+    ORANGE_CARE = "orange care"
+    PINK_CARE = "pink care"
+
+    CARE_CHOICES = (
+        (BLUE_CARE, "Blue Care"),
+        (GREEN_CARE, "Green Care"),
+        (ORANGE_CARE, "Orange Care"),
+        (PINK_CARE, "Pink Care"),
+    )
+
     name = models.CharField(max_length=30)
     city = models.CharField(max_length=80)
     gender = models.CharField(choices=GENDER_CHOICES, max_length=10)
     is_neutered = models.BooleanField(default=False)
     birthdate = models.DateField(null=True, blank=True)
     estimated_age = models.CharField(max_length=10, default=0)
+    appearance = models.ForeignKey(
+        Appearance, related_name="cats", null=True, on_delete=models.SET_NULL
+    )
     skittishness = models.IntegerField()
     outgoingness = models.IntegerField()
     dominance = models.IntegerField()
     spontaneity = models.IntegerField()
     friendliness = models.IntegerField()
+    care_category = models.CharField(
+        choices=CARE_CHOICES, default=GREEN_CARE, max_length=12
+    )
+    foster_needed = models.BooleanField(default=False)
     mom_cat = models.ForeignKey(
         "self", blank=True, null=True, related_name="mom", on_delete=models.SET_NULL,
     )
@@ -61,7 +85,8 @@ class Cat(core_models.TimeStampedModel):
         blank=False,
         null=False,
         related_name="cats",
-        on_delete=models.PROTECT,
+        default="admin",
+        on_delete=models.SET_DEFAULT,
     )
 
     barcode = models.IntegerField(blank=True, null=True)
@@ -73,6 +98,9 @@ class Cat(core_models.TimeStampedModel):
     def save(self, *args, **kwargs):
         self.city = str.capitalize(self.city)
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("cats:detail", kwargs={"pk": self.pk})
 
     def count_age(self):
         now = date.today()
@@ -88,6 +116,10 @@ class Cat(core_models.TimeStampedModel):
         else:
             age = self.estimated_age
         return age
+
+    def first_photo(self):
+        (photo,) = self.photos.all()[:1]
+        return photo.file.url
 
 
 class Photo(core_models.TimeStampedModel):

@@ -1,5 +1,9 @@
-<a href ="{% url "core:home" %}">Home</a>
-
-<ul>
-    <li><a href="#">Login</a></li>
+<ul class="flex itmes-center font-semibold text-sm h-full">
+    {% if user.is_authenticated %}
+        <li class="nav_link"><a href="{{user.get_absolute_url}}">My Profile</a></li>
+        <li class="nav_link"><a href="{% url "users:logout" %}">Log out</a></li>
+    {% else %}
+        <li class="nav_link"><a href="{% url "users:login" %}"</li>Log in</a></li>
+        <li class="nav_link"><a href="{% url "users:signup" %}"</li>Sign up</a></li>
+    {% endif %}
 </ul>

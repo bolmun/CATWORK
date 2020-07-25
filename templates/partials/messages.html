@@ -1,0 +1,18 @@
+{% if messages %}
+    <ul class="absolute top-1/2 left-1/2 mx-auto flex justify-center transform -translate-x-1/2 -translate-y-1/2 ">
+        {% for message in messages %}
+            <li class="message font-medium z-10 bg-gray-300 bg-opacity-50 py-4 px-6 text-center rounded-full {% if message.tags %}{{message.tags}}{% endif %}">
+                {% if message.tags == 'success' %}
+                <i class="far fa-smile-wink"></i>
+                {% elif message.tags == 'error' %}
+                <i class="far fa-frown"></i>
+                {% elif message.tags == 'info' %}
+                <i class="far fa-smile"></i>
+                {% elif message.tags == 'warning' %}
+                <i class="far fa-dizzy"></i>
+                {% endif %}
+                {{message}}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

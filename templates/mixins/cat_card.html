@@ -1,0 +1,33 @@
+<div class="w-1/4 mb-10 px-2">
+<a href="{% url "cats:detail" cat.pk %}">
+    <div class="w-full h-25vh bg-cover bg-center rounded-lg" style="background-image: url({{cat.first_photo}});"></div>
+    <div class="flex items-center justify-between mt-1">
+            <span class="text-sm text-gray-600">{{cat.city}}</span>
+        {% if cat.foster_needed %}
+            {% if cat.care_category == "green care" %}
+            <span class="uppercase font-medium text-xs border text-green-600 rounded py-px px-1">{{cat.care_category}}</span>
+            {% elif cat.care_category == "blue care" %}
+            <span class="uppercase font-medium text-xs border text-blue-500 rounded py-px px-1">{{cat.care_category}}</span>
+            {% elif cat.care_category == "orange care" %}
+            <span class="uppercase font-medium text-xs border text-orange-400 rounded py-px px-1">{{cat.care_category}}</span>
+            {% elif cat.care_category == "pink care" %}
+            <span class="uppercase font-medium text-xs border text-pink-500 rounded py-px px-1">{{cat.care_category}}</span>
+            {% endif %}
+        {% endif %}      
+    </div>
+    <div class="text-sm font-semibold flex justify-between items-center mt-0">
+        <span >
+        {{cat.name}}, {% if cat.birthdate == None %} {{cat.estimated_age}}
+            {% else %} {{cat.count_age}}
+            {% endif %}
+        </span>
+        <span class="text-base">
+            {% if cat.gender == "female" %}
+                <i class="fas fa-venus mr-2"></i>
+            {% else %}
+                <i class="fas fa-mars mr-2"></i>
+            {% endif %}
+        </span>
+    </div>
+    </a>
+</div>

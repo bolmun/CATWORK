@@ -4,6 +4,9 @@
     Search
 {% endblock page_title %}
 
+{% block search-bar %}
+{% endblock search-bar %}
+
 {% block content %}
 
     <h2>Search!</h2>
@@ -12,5 +15,10 @@
         {{form.as_p}}
         <button>Search</button>
     </form>
+
+    <h3>Results</h3>
+    {% for cat in cats %}
+        <h5>{{cat.name}}</h5>
+    {% endfor %}
 
 {% endblock content %} 
