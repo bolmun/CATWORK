@@ -45,6 +45,7 @@ class User(AbstractUser):
     login_method = models.CharField(
         max_length=50, choices=LOGIN_CHOICES, default=LOGIN_EMAIL
     )
+    bio = models.TextField(default="Please introduce yourself briefly")
     foster_available = models.BooleanField(default=False)
     adoption_available = models.BooleanField(default=False)
 

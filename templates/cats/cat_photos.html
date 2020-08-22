@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    {{cat.name}}'s Photos
+{% endblock page_title %}
+
+{% block search-bar %}
+{% endblock search-bar %}
+
+{% block content %}
+
+<div class="container mx-auto my-10 flex flex-col items-center">
+
+    <div class="-mb-3 mt-5 w-16 h-16 text-white rounded-full bg-gray-700 flex items-center justify-center">
+        <a href="{% url 'cats:add-photo' cat.pk %}" class=" block"><i class="fas fa-plus text-xs sm:text-md mr-1"></i><i class="fas fa-camera text-lg sm:text-xl"></i></a>
+    </div>
+
+    <div class="container mx-auto my-10 flex flex-col ">
+        {% for photo in cat.photos.all %}
+            <div class="border p-6 border-gray-200 mb-5 flex justify-between">
+                <div class="flex flex-col items-center">
+                    <img src="{{photo.file.url}}" class="w-32 h-32 sm:w-40 sm:h-40" />
+                    <span class="text-sm sm:text-lg">{{photo.caption}}</span>
+                </div>
+                <div class="flex flex-col justify-center items-center -mt-4 w-1/3 sm:w-1/4">
+                    <a class="btn-link text-sm sm:text-lg" href="{% url 'cats:delete-photo' cat.pk photo.pk %}"><i class="far fa-trash-alt mr-2"></i>Delete</a>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="flex justify-center mt-2">
+            <a href="{% url 'cats:edit' cat.pk %}" class="text-gray-500 font-medium text-lg"><i class="fas fa-backward mr-2"></i>Back to edit cat</a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock content %}

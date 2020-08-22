@@ -19,3 +19,15 @@ class SearchForm(forms.Form):
         required=False, empty_label="Any kind", queryset=models.Appearance.objects.all()
     )
     is_neutered = forms.BooleanField(required=False)
+
+
+class CreatePhotoForm(forms.ModelForm):
+    class Meta:
+        model = models.Photo
+        fields = ("caption", "file")
+
+    def save(self, pk, *args, **kwargs):
+        photo = super().save(commit=False)
+        cat = models.Cat.objects.get(pk=pk)
+        photo.cat = cat
+        photo.save()

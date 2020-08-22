@@ -1,0 +1,55 @@
+<div class="w-20 mr-2 mb-3">
+{%if cat.mom_cat != None%}
+    <a href="{% url "cats:detail" cat.mom_cat.pk %}" class="flex flex-col items-center">
+        <span class="mt-1 text-gray-700 text-sm mb-0">Mom</span>
+        <div class="rounded-full bg-cover h-16 w-16" style="background-image: url({{cat.mom_cat.first_photo}})"></div>
+        <span class="mt-1 text-sm text-gray-700 text-center leading-3">{{cat.mom_cat}}</span>
+    </a>
+    {% else %}
+        <div class="flex flex-col items-center">
+        <span class="mt-1 text-gray-700 text-sm mb-0">Mom</span>
+            <div class="h-16 w-16 bg-gray-500 rounded-full text-white flex justify-center items-center overflow-hidden">
+            <span class="text-2xl"><i class="fas fa-cat"></i></span>
+            </div>
+            <span class="mt-1 text-sm text-gray-700 leading-3">somewhere</span>
+        </div>
+    {% endif %}
+</div>
+
+
+<div class="w-20 mr-2 mb-3">
+{%if cat.dad_cat != None %}
+    <a href="{% url "cats:detail" cat.mom_cat.pk %}" class="flex flex-col items-center">
+        <span class="mt-1 text-gray-700 text-sm mb-0">Dad</span>
+        <div class="rounded-full bg-cover h-16 w-16" style="background-image: url({{cat.dad_cat.first_photo}})"></div>
+        <span class="mt-1 text-sm text-gray-700 text-center leading-3">{{cat.dad_cat}}</span>
+    </a>
+{% else %}
+    <div class="flex flex-col items-center">
+        <span class="mt-1 text-gray-700 text-sm mb-0">Dad</span>
+            <div class="h-16 w-16 bg-gray-500 rounded-full text-white flex justify-center items-center overflow-hidden">
+            <span class="text-2xl"><i class="fas fa-cat"></i></span>
+            </div>
+            <span class="mt-1 text-sm text-gray-700 leading-3">somewhere</span>
+    </div>
+{% endif %}
+</div>
+
+
+{%if cat.bro_sis != None%}
+    {% for bs in cat.bro_sis.all %}
+        <a href="{% url "cats:detail" bs.pk %}">
+        <div class="flex flex-col items-center w-20 mr-2 mb-3">
+            {% if bs.gender == "female" %}
+                <span class="mt-1 text-gray-700 text-sm mb-0">Sis</span>
+            {% else %}
+                <span class="mt-1 text-gray-700 text-sm mb-0">Bro</span>
+            {% endif %}
+            {% if bs.first_photo %}
+            <div class="rounded-full bg-cover h-16 w-16" style="background-image: url({{bs.first_photo}})"></div>
+            <span class="mt-1 text-sm text-gray-700 text-center leading-3">{{bs}}</span>
+            {% endif %}   
+        </div>
+        </a>
+    {% endfor %}
+{% endif %}

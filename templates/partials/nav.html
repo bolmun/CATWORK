@@ -1,9 +1,9 @@
-<ul class="flex itmes-center font-semibold text-sm h-full">
+<ul class="flex itmes-center font-semibold sm:text-sm text-xs h-full">
     {% if user.is_authenticated %}
-        <li class="nav_link"><a href="{{user.get_absolute_url}}">My Profile</a></li>
-        <li class="nav_link"><a href="{% url "users:logout" %}">Log out</a></li>
+        <li class="nav_link"><a href="{{user.get_absolute_url}}">My Profile</li></a>
+        <li class="nav_link mr-3"><a href="{% url "users:logout" %}">Log out</li></a>
     {% else %}
-        <li class="nav_link"><a href="{% url "users:login" %}"</li>Log in</a></li>
-        <li class="nav_link"><a href="{% url "users:signup" %}"</li>Sign up</a></li>
+        <li class="nav_link"><a href="{% url "users:login" %}">Log in</li></a>
+        <li class="nav_link mr-3"><a href="{% url "users:signup" %}">Sign up</li></a>
     {% endif %}
 </ul>

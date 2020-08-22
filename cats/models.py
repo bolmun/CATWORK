@@ -1,6 +1,7 @@
 import math
 from datetime import date
 from django.db import models
+from django.shortcuts import reverse
 from core import models as core_models
 
 
@@ -120,6 +121,10 @@ class Cat(core_models.TimeStampedModel):
     def first_photo(self):
         (photo,) = self.photos.all()[:1]
         return photo.file.url
+
+    def get_rest_photos(self):
+        photos = self.photos.all()[1:5]
+        return photos
 
 
 class Photo(core_models.TimeStampedModel):

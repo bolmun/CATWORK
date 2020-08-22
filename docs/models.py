@@ -51,7 +51,7 @@ class Doc(core_models.TimeStampedModel):
     reason_adopt = models.TextField()
 
     def __str__(self):
-        return f"{self.applicant}님 | {self.cat} 입양 신청서"
+        return f"{self.applicant}님 | {self.cat} Foster application"
 
 
 class Photo(core_models.TimeStampedModel):

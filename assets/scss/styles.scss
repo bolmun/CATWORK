@@ -23,7 +23,12 @@
   @apply text-center py-3 rounded-lg font-light text-lg w-full text-white bg-red-500;
 }
 
+.btn-link-blue {
+  @apply text-center py-3 rounded-lg font-light text-lg w-full text-white bg-orange-500;
+}
+
 input,
+textarea,
 select {
   @apply rounded-md py-5 font-light text-lg w-full text-left border border-gray-400 px-5;
   &:focus {
@@ -31,8 +36,13 @@ select {
   }
 }
 
+textarea {
+  resize: none;
+  height: 200px;
+}
+
 select {
-  height: 50px;
+  height: 65px;
 }
 
 form {
@@ -78,6 +88,18 @@ form {
   &.warning {
     @apply text-orange-500;
   }
+}
+
+.section-border {
+  @apply border-b border-gray-400 pb-8 mt-8;
+}
+
+.info-separator {
+  @apply border-r-2 border-gray-700 pr-2;
+}
+
+.info-title {
+  @apply text-xl font-semibold text-gray-700;
 }
 
 @tailwind utilities;

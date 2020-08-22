@@ -7,7 +7,7 @@ from . import models
 class CustomUserAdmin(UserAdmin):
 
     fieldsets = UserAdmin.fieldsets + (
-        ("Custom Profile", {"fields": ("avatar", "gender", "login_method",)},),
+        ("Custom Profile", {"fields": ("avatar", "gender", "bio", "login_method",)},),
         (
             "Status",
             {"fields": ("is_group_id", "foster_available", "adoption_available",)},

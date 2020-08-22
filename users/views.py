@@ -205,6 +205,7 @@ class UpdateProfileView(mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateView
         "email",
         "first_name",
         "last_name",
+        "bio",
         "gender",
         "foster_available",
         "adoption_available",

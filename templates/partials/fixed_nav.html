@@ -1,0 +1,12 @@
+<nav class="sm:hidden container max-w-full inset-x-0 bottom-0 fixed text-center py-4 border-t bg-gray-200 px-6 font-medium text-gray-700 flex flex-col">
+    <ul class="flex justify-around itmes-center text-xs h-full">
+    {% if user.is_authenticated %}
+        <li class="flex flex-col"><i class="fas fa-heart text-xl"></i>Adopt</li>
+        <li class="flex flex-col"><i class="fas fa-comments text-xl"></i>Message</a></li>
+        <li class="flex flex-col"><i class="fas fa-user text-xl"></i><a href="{{user.get_absolute_url}}">My page</a></li>
+    {% else %}
+        <li><a href="{% url "users:login" %}"</li>Log in</a></li>
+        <li><a href="{% url "users:signup" %}"</li>Sign up</a></li>
+    {% endif %}
+</ul>
+</nav>
